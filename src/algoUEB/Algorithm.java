@@ -74,7 +74,7 @@ public class Algorithm {
 	int[][] computeReverseMatrix() // returns the reverse matrix
 	{
 
-		int[][] ReverseMatrix = new int[n][n]; // is initialised with 0 so we don't have to change anything in this base case
+		reverseMatrix = new int[n][n]; // is initialised with 0 so we don't have to change anything in this base case
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
 				if (matrix[i][j] == 1) {
