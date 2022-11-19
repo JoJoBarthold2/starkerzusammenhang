@@ -143,5 +143,21 @@ public class Algorithm {
 		return finalresult;
 	}
 	
+	void printComponents (List<List<Integer>> complist) {
+		int size = complist.size();
+		for(int i = 0; i < size; i++) {
+			if (i == 0) {
+				System.out.println("First component : ");
+			}
+			else {System.out.println( i+1 + ". component :");}
+			for(int j = 0; j < complist.get(i).size(); j++) {
+				System.out.print(complist.get(i).get(j));
+				System.out.print(",");
+			}
+			System.out.println();
+			
+		}
+	}
+	
 	
 }
