@@ -21,7 +21,7 @@ public class Algorithm {
 
 		int lines = 0;
 		try (BufferedReader reader = new BufferedReader(new FileReader(filepath))) // count how many lines we have in the doc
-		{
+		{		
 			while (reader.readLine() != null) {
 				lines++;
 			}
@@ -117,8 +117,16 @@ public class Algorithm {
 	{
 		List<List<Integer>> finalresult = new ArrayList<>();
 
-		matrix = readCSV(filepath);
+		 matrix = readCSV(filepath);
 		n = matrix.length;
+		
+		for(int i = 0; i <n;i++) {
+			for(int j = 0; j<n; j++) {
+				System.out.print(matrix[i][j]);
+				
+			}
+			System.out.println();
+		}
 		visited = new int[n];
 		finishTime = new Stack<Integer>();
 		dfstimed();
@@ -134,4 +142,6 @@ public class Algorithm {
 
 		return finalresult;
 	}
+	
+	
 }
