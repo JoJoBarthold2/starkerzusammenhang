@@ -30,29 +30,31 @@ public class Algorithm {
 		catch(IOException e)
 		{e.printStackTrace();}
 
-		int[][] records = new int[lines][lines];
+		int[][] records = new int[lines][lines]; //create a fitting matrix 
 
 		try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
 			String line;
 			int count =0;
 
-			while ((line = br.readLine()) != null) {
+			while ((line = br.readLine()) != null) // but the values in the matrix
+			{
 				String[] values = line.split(",");
 				for (int i = 0; i < lines; i++) {
-					records[count][i] = Integer.parseInt(values[i]);
+					records[count][i] = Integer.parseInt(values[i]); // we have to convert from string to int here 
 				}
 				count++;
 			}
 		}
 		
 		catch(IOException e)
-		{e.printStackTrace();}
+		{e.printStackTrace();}//this helps us finding errors
 		return records;
 	}
 
 	void dfstimed() // dfs with finishing time 
 	{
-    for(int i = 0; i < n; i++) {
+    for(int i = 0; i < n; i++) // visit every node
+    {
     	if(visited[i] == 0) {
     		visitTimed(i);
     	}
@@ -62,7 +64,8 @@ public class Algorithm {
 	
 	void visitTimed(int u) {
 		visited[u] = 1;
-		for(int i = 0; i < n; i++) {
+		for(int i = 0; i < n; i++) // visit all adjacent nodes
+		{
 			if(matrix[u][i] == 1 && visited[i] == 0) {
 				visitTimed(i);
 			}
@@ -89,12 +92,13 @@ public class Algorithm {
 	List<Integer> makeComponent(int start) {
 
 		results = new ArrayList<Integer>();
-		results.add(start);
+		results.add(start); // ad it to the component
 		visited[start] = 1; // 1 is our grey color, 0 is our white color
-		for (int i = 0; i < n; i++) {
+		for (int i = 0; i < n; i++) // visit all neighbors
+		{
 			if (reverseMatrix[start][i] == 1 && visited[i] == 0) {
-				results.add(i);
-				visitComponent(i);
+				results.add(i); // ad them to the component
+				visitComponent(i); 
 			}
 		}
 		return results;
@@ -118,25 +122,29 @@ public class Algorithm {
 		List<List<Integer>> finalresult = new ArrayList<>();
 
 		 matrix = readCSV(filepath);
-		n = matrix.length;
+		n = matrix.length; // this makes the code a little more readable 
 		
-		for(int i = 0; i <n;i++) {
+		/*for(int i = 0; i <n;i++) {
 			for(int j = 0; j<n; j++) {
 				System.out.print(matrix[i][j]);
 				
 			}
 			System.out.println();
-		}
+		}*/
 		visited = new int[n];
+		
 		finishTime = new Stack<Integer>();
+		
 		dfstimed();
+		
 		reverseMatrix = computeReverseMatrix();
+		
 		visited = new int[n];
 		while (!finishTime.empty()) {
-			int v = finishTime.pop();
+			int v = finishTime.pop(); // look at the object with the largest finishing time still remaining
 			if (visited[v] == 0) {
 				makeComponent(v);
-				finalresult.add(results);
+				finalresult.add(results); // add the component to the list of components
 			}
 		}
 
@@ -145,16 +153,18 @@ public class Algorithm {
 	
 	void printComponents (List<List<Integer>> complist) {
 		int size = complist.size();
-		for(int i = 0; i < size; i++) {
+		for(int i = 0; i < size; i++) // go through the list of components
+		{
 			if (i == 0) {
 				System.out.println("First component : ");
 			}
 			else {System.out.println( i+1 + ". component :");}
-			for(int j = 0; j < complist.get(i).size(); j++) {
+			for(int j = 0; j < complist.get(i).size(); j++) // go through the components themselves 
+			{
 				System.out.print(complist.get(i).get(j));
 				System.out.print(",");
 			}
-			System.out.println();
+			System.out.println(); // add an extra line for formatting 
 			
 		}
 	}
